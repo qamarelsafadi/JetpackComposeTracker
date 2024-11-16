@@ -16,6 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -54,16 +55,11 @@ fun RecompositionTrackerScreen() {
 
         Spacer(modifier = Modifier.height(28.dp))
 
-        Button(
-            onClick = {
-                if (inputText.value.isNotBlank()) {
-                    items.add(inputText.value)
-                    inputText.value = ""
-                }
-            },
-            modifier = Modifier.trackRecompositions()
-        ) {
-            Text("Add Item")
+        TrackButton {
+            if (inputText.value.isNotBlank()) {
+                items.add(inputText.value)
+                inputText.value = ""
+            }
         }
         Spacer(modifier = Modifier.height(16.dp))
         List(items)
@@ -71,9 +67,24 @@ fun RecompositionTrackerScreen() {
 }
 
 @Composable
+private fun TrackButton(
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick, modifier = Modifier.trackRecompositions()
+
+    ) {
+        Text(
+            "Add Item",
+        )
+    }
+}
+
+@Composable
 private fun List(items: SnapshotStateList<String>) {
     LazyColumn(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .trackRecompositions(),
         verticalArrangement = Arrangement.spacedBy(23.dp)
     ) {
