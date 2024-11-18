@@ -38,6 +38,18 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
+    afterEvaluate {
+        publishing {
+            publications {
+                create<MavenPublication>("maven") {
+                    from (components["release"])
+                    groupId = "com.github.qamarelsafadi"
+                    artifactId = "jetpack-compose-traker"
+                    version = "0.1"
+                }
+            }
+        }
+    }
 }
 
 dependencies {
