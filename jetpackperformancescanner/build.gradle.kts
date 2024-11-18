@@ -2,11 +2,12 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("maven-publish")
+    id("com.vanniktech.maven.publish") version "0.29.0"
 }
 
 android {
     namespace = "com.qamar.jetpack_performance_scanner"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
@@ -37,18 +38,6 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
-    }
-    afterEvaluate {
-        publishing {
-            publications {
-                create<MavenPublication>("maven") {
-                    from (components["release"])
-                    groupId = "com.github.qamarelsafadi"
-                    artifactId = "jetpack-compose-traker"
-                    version = "0.1"
-                }
-            }
-        }
     }
 }
 

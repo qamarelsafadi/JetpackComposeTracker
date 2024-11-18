@@ -1,11 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.vanniktech.maven.publish") version "0.29.0"
 }
 
 android {
     namespace = "com.qamar.jetpackcomposscanner"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.qamar.jetpackcomposscanner"
@@ -59,7 +60,6 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation("com.github.qamarelsafadi:JetpackComposeTracker:0.1")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
