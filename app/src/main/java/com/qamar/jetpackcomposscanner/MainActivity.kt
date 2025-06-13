@@ -119,6 +119,20 @@ fun RecompositionItem(
     }
 }
 
+/**
+ * Conditionally tracks recompositions of a Composable, useful for debugging in development.
+ *
+ * Usage:
+ * ```kotlin
+ * Modifier.trackRecompositionsIf()
+ * Modifier.trackRecompositionsIf(enabled = true)
+ * ```
+ *
+ * @param enabled Whether recomposition tracking should be applied. Default is `false`.
+ * You can pass `BuildConfig.DEBUG` or use your own runtime flag.
+ *
+ * @return The original Modifier if disabled, or a recomposition-tracking Modifier if enabled.
+ */
 @Composable
 fun Modifier.trackRecompositionsIf(
     enabled: Boolean = FakeAppConfig.enableCompositionTracker
