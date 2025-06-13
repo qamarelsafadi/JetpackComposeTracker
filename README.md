@@ -9,6 +9,7 @@ Inspired by [React Scanner](https://t.co/jyqyMp9SZ4), this tool shows which comp
 - Real-time recomposition tracking: See when and how your composables are recomposed.
 - Live recomposition count: Each component that gets recomposed shows how many times it has been recomposed.
 - Visual feedback: Components that are recomposed are outlined with a red border, and their recomposition count is displayed.
+- Production-safe debugging: Use `trackRecompositionsIf()` to leave tracking in your codebase safely — no need to manually add or remove modifiers.
 
 # Demo
 
@@ -19,6 +20,32 @@ https://github.com/user-attachments/assets/6b540c1c-b3c0-455d-84dc-f6f1707416ea
 This tool uses the ```Modifier.trackRecompositions()``` to track recompositions. When a recomposition occurs, the component will display a red border, and the recomposition count will update.
 
 You can customize the ```trackRecompositions()``` modifier to track different UI components in your app and use this tool to debug and optimize your Jetpack Compose UI.
+
+#### Using `trackRecompositionsIf()`:
+No need to add and remove `trackRecompositions()` everytime you want to test. You can safely keep the code even in production.
+
+All you need to do is define this extension function in your project
+~~~kotlin
+/**
+ * Conditionally tracks recompositions of a Composable, useful for debugging in development.
+ *
+ * Usage:
+ * ```kotlin
+ * Modifier.trackRecompositionsIf()
+ * Modifier.trackRecompositionsIf(enabled = true)
+ * Modifier.trackRecompositionsIf(enabled = BuildConfig.DEBUG)
+ * ```
+ *
+ * @param enabled Whether recomposition tracking should be applied. Default is `false`.
+ * You can pass `BuildConfig.DEBUG` or use your own runtime flag.
+ *
+ * @return The original Modifier if disabled, or a recomposition-tracking Modifier if enabled.
+ */
+@Composable
+fun Modifier.trackRecompositionsIf(enabled: Boolean = false): Modifier {
+    return if (enabled) this.trackRecompositions() else this
+}
+~~~
 
 
 ## Contribution
