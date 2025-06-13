@@ -27,6 +27,10 @@ import androidx.compose.ui.unit.dp
 import com.qamar.composescanner.trackRecompositions
 import com.qamar.jetpackcomposscanner.ui.theme.JetpackComposScannerTheme
 
+object FakeAppConfig {
+    val enableCompositionTracker: Boolean = true
+}
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +54,7 @@ fun RecompositionTrackerScreen() {
             label = { Text("Enter item") },
             modifier = Modifier
                 .fillMaxWidth()
-                .trackRecompositions()
+                .trackRecompositionsIf()
         )
 
         Spacer(modifier = Modifier.height(28.dp))
@@ -71,7 +75,7 @@ private fun TrackButton(
     onClick: () -> Unit
 ) {
     Button(
-        onClick = onClick, modifier = Modifier.trackRecompositions()
+        onClick = onClick, modifier = Modifier.trackRecompositionsIf()
 
     ) {
         Text(
@@ -85,7 +89,7 @@ private fun List(items: SnapshotStateList<String>) {
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
-            .trackRecompositions(),
+            .trackRecompositionsIf(),
         verticalArrangement = Arrangement.spacedBy(23.dp)
     ) {
         items(items, key = {
@@ -113,4 +117,11 @@ fun RecompositionItem(
             style = MaterialTheme.typography.bodyLarge
         )
     }
+}
+
+@Composable
+fun Modifier.trackRecompositionsIf(
+    enabled: Boolean = FakeAppConfig.enableCompositionTracker
+): Modifier {
+    return if (enabled) this.trackRecompositions() else this
 }
