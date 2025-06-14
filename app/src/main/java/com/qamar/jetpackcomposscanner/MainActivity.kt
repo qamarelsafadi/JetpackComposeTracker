@@ -16,7 +16,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,7 +49,7 @@ fun RecompositionTrackerScreen() {
             label = { Text("Enter item") },
             modifier = Modifier
                 .fillMaxWidth()
-                .trackRecompositions()
+                .trackRecompositionsIf()
         )
 
         Spacer(modifier = Modifier.height(28.dp))
@@ -71,7 +70,7 @@ private fun TrackButton(
     onClick: () -> Unit
 ) {
     Button(
-        onClick = onClick, modifier = Modifier.trackRecompositions()
+        onClick = onClick, modifier = Modifier.trackRecompositionsIf()
 
     ) {
         Text(
@@ -85,7 +84,7 @@ private fun List(items: SnapshotStateList<String>) {
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
-            .trackRecompositions(),
+            .trackRecompositionsIf(),
         verticalArrangement = Arrangement.spacedBy(23.dp)
     ) {
         items(items, key = {
@@ -113,4 +112,25 @@ fun RecompositionItem(
             style = MaterialTheme.typography.bodyLarge
         )
     }
+}
+
+/**
+ * Conditionally tracks recompositions of a Composable, useful for debugging in development.
+ *
+ * Usage:
+ * ```kotlin
+ * Modifier.trackRecompositionsIf()
+ * Modifier.trackRecompositionsIf(enabled = true)
+ * ```
+ *
+ * @param enabled Whether recomposition tracking should be applied. Default is `false`.
+ * You can pass `BuildConfig.DEBUG` or use your own runtime flag.
+ *
+ * @return The original Modifier if disabled, or a recomposition-tracking Modifier if enabled.
+ */
+@Composable
+fun Modifier.trackRecompositionsIf(
+    enabled: Boolean = BuildConfig.DEBUG
+): Modifier {
+    return if (enabled) this.trackRecompositions() else this
 }
