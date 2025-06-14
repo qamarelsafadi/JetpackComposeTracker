@@ -16,7 +16,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,10 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.qamar.composescanner.trackRecompositions
 import com.qamar.jetpackcomposscanner.ui.theme.JetpackComposScannerTheme
-
-object FakeAppConfig {
-    val enableCompositionTracker: Boolean = true
-}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -135,7 +130,7 @@ fun RecompositionItem(
  */
 @Composable
 fun Modifier.trackRecompositionsIf(
-    enabled: Boolean = FakeAppConfig.enableCompositionTracker
+    enabled: Boolean = BuildConfig.DEBUG
 ): Modifier {
     return if (enabled) this.trackRecompositions() else this
 }
