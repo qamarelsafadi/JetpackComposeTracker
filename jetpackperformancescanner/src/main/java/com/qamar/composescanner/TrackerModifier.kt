@@ -50,3 +50,23 @@ fun Modifier.trackRecompositions(): Modifier {
         .border(2.dp, Color.Red)
         .padding(16.dp)
 }
+
+/**
+ * Conditionally tracks recompositions of a Composable, useful for debugging in development.
+ *
+ * Usage:
+ * ```kotlin
+ * Modifier.trackRecompositionsIf()
+ * Modifier.trackRecompositionsIf(enabled = true)
+ * Modifier.trackRecompositionsIf(enabled = BuildConfig.DEBUG)
+ * ```
+ *
+ * @param enabled Whether recomposition tracking should be applied. Default is `false`.
+ * You can pass `BuildConfig.DEBUG` or use your own runtime flag.
+ *
+ * @return The original Modifier if disabled, or a recomposition-tracking Modifier if enabled.
+ */
+@Composable
+fun Modifier.trackRecompositionsIf(enabled: Boolean = false): Modifier {
+    return if (enabled) this.trackRecompositions() else this
+}

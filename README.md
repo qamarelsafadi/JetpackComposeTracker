@@ -11,50 +11,99 @@ Inspired by [React Scanner](https://t.co/jyqyMp9SZ4), this tool shows which comp
 - Visual feedback: Components that are recomposed are outlined with a red border, and their recomposition count is displayed.
 - Production-safe debugging: Use `trackRecompositionsIf()` to leave tracking in your codebase safely — no need to manually add or remove modifiers.
 
-# Demo
+## Demo
 
 https://github.com/user-attachments/assets/6b540c1c-b3c0-455d-84dc-f6f1707416ea
 
+## Installation
+
+Add the dependency to your app's `build.gradle.kts`:
+
+```kotlin
+dependencies {
+    implementation("io.github.qamarelsafadi:compose-tracker:1.0.0")
+}
+```
+
+## Usage
+
+### Basic Tracking
+Use `trackRecompositions()` to track recompositions on any Composable:
+
+```kotlin
+@Composable
+fun MyComposable() {
+    Text(
+        text = "Hello World",
+        modifier = Modifier.trackRecompositions()
+    )
+}
+```
+
+### Production-Safe Tracking
+Use `trackRecompositionsIf()` for conditional tracking that's safe to leave in production:
+
+```kotlin
+@Composable
+fun MyComposable() {
+    Text(
+        text = "Hello World",
+        modifier = Modifier
+            .trackRecompositionsIf(BuildConfig.DEBUG) // Only in debug builds
+            .padding(16.dp)
+    )
+}
+```
+
+Available options:
+```kotlin
+// Always disabled (default)
+Modifier.trackRecompositionsIf()
+
+// Always enabled
+Modifier.trackRecompositionsIf(enabled = true)
+
+// Only in debug builds
+Modifier.trackRecompositionsIf(enabled = BuildConfig.DEBUG)
+
+// Custom condition
+Modifier.trackRecompositionsIf(enabled = isDebugging)
+```
 
 ## How It Works
-This tool uses the ```Modifier.trackRecompositions()``` to track recompositions. When a recomposition occurs, the component will display a red border, and the recomposition count will update.
 
-You can customize the ```trackRecompositions()``` modifier to track different UI components in your app and use this tool to debug and optimize your Jetpack Compose UI.
+This tool uses the `Modifier.trackRecompositions()` to track recompositions. When a recomposition occurs, the component will display a red border, and the recomposition count will update.
 
-#### Using `trackRecompositionsIf()`:
-No need to add and remove `trackRecompositions()` everytime you want to test. You can safely keep the code even in production.
-
-All you need to do is define this extension function in your project
-~~~kotlin
-/**
- * Conditionally tracks recompositions of a Composable, useful for debugging in development.
- *
- * Usage:
- * ```kotlin
- * Modifier.trackRecompositionsIf()
- * Modifier.trackRecompositionsIf(enabled = true)
- * Modifier.trackRecompositionsIf(enabled = BuildConfig.DEBUG)
- * ```
- *
- * @param enabled Whether recomposition tracking should be applied. Default is `false`.
- * You can pass `BuildConfig.DEBUG` or use your own runtime flag.
- *
- * @return The original Modifier if disabled, or a recomposition-tracking Modifier if enabled.
- */
-@Composable
-fun Modifier.trackRecompositionsIf(enabled: Boolean = false): Modifier {
-    return if (enabled) this.trackRecompositions() else this
-}
-~~~
-
+The library provides two main functions:
+- `trackRecompositions()`: Always tracks recompositions
+- `trackRecompositionsIf(enabled: Boolean)`: Conditionally tracks recompositions based on the enabled parameter
 
 ## Contribution
-If you’d like to contribute to this project, feel free to open issues, submit pull requests, or suggest new features. Here's how you can contribute:
+
+If you'd like to contribute to this project, feel free to open issues, submit pull requests, or suggest new features. Here's how you can contribute:
 
 - Fork the repository.
 - Create a new branch for your feature or fix.
 - Make your changes.
 - Submit a pull request.
+
+## License
+
+```
+Copyright 2024 Qamar Safadi
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
 
 
 

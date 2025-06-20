@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("maven-publish")
+    id("signing")
     id("com.vanniktech.maven.publish") version "0.29.0"
 }
 
@@ -52,4 +53,42 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+// Maven Central Publishing Configuration
+mavenPublishing {
+    publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.CENTRAL_PORTAL)
+    
+    signAllPublications()
+    
+    coordinates("io.github.qamarelsafadi", "compose-tracker", "1.0.0")
+    
+    pom {
+        name.set("Jetpack Compose Tracker")
+        description.set("A simple tool to track UI recompositions in real-time for Jetpack Compose. Helps visualize and measure how often your components are recomposed.")
+        inceptionYear.set("2024")
+        url.set("https://github.com/qamarelsafadi/JetpackComposeTracker/")
+        
+        licenses {
+            license {
+                name.set("The Apache License, Version 2.0")
+                url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                distribution.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+            }
+        }
+        
+        developers {
+            developer {
+                id.set("qamarelsafadi")
+                name.set("Qamar Safadi")
+                url.set("https://github.com/qamarelsafadi/")
+            }
+        }
+        
+        scm {
+            url.set("https://github.com/qamarelsafadi/JetpackComposeTracker/")
+            connection.set("scm:git:git://github.com/qamarelsafadi/JetpackComposeTracker.git")
+            developerConnection.set("scm:git:ssh://git@github.com/qamarelsafadi/JetpackComposeTracker.git")
+        }
+    }
 }
