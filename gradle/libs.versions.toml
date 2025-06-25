@@ -14,6 +14,8 @@ material = "1.12.0"
 material3 = "1.3.1"
 ui = "1.7.5"
 uiTooling = "1.7.5"
+compose-multiplatform = "1.8.2"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 compose-tracker = { module = "io.github.qamarelsafadi:compose-tracker", version.ref = "composeTracker" }
@@ -41,4 +43,6 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 
