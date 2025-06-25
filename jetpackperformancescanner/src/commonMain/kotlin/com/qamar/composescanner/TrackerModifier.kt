@@ -4,47 +4,53 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.drawText
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun Modifier.trackRecompositions(): Modifier {
-    val recompositionCount = remember { mutableStateOf(0) }
+    var recompositionCount by remember { mutableIntStateOf(0) }
+    val textMeasurer = rememberTextMeasurer()
 
     // Use SideEffect to track recompositions (increments only once per recomposition)
     SideEffect {
-        recompositionCount.value += 1
+        recompositionCount += 1
     }
-
 
     // Draw content with a red border and recomposition count
     return this
         .then(
             Modifier.drawWithContent {
                 drawContent() // Draw the original content
-                val text = "Recompositions: ${recompositionCount.value}"
-                drawIntoCanvas { canvas ->
-                    val paint = android.graphics
-                        .Paint()
-                        .apply {
-                            textSize = 40f
-                            color = android.graphics.Color.RED
-                            isAntiAlias = true
-                        }
-                    // Draw the recomposition count text below the content
-                    canvas.nativeCanvas.drawText(
-                        text,
-                        10f,
-                        size.height + 40f,
-                        paint
+                val text = "Recompositions: $recompositionCount"
+                val textStyle = TextStyle(
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Red
+                )
+
+                // Draw the recomposition count text overlay on top of content
+                drawText(
+                    textMeasurer = textMeasurer,
+                    text = text,
+                    style = textStyle,
+                    topLeft = Offset(
+                        x = 8f,
+                        y = 8f
                     )
-                }
+                )
             }
         )
         .border(2.dp, Color.Red)
