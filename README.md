@@ -13,7 +13,7 @@ Inspired by [React Scanner](https://t.co/jyqyMp9SZ4), this tool shows which comp
 
 ## Demo
 
-https://github.com/user-attachments/assets/6b540c1c-b3c0-455d-84dc-f6f1707416ea
+https://github.com/user-attachments/assets/da45964c-47ca-41ea-aa03-61b189b1576f
 
 ## Installation
 
