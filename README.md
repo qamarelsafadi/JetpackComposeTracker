@@ -1,6 +1,6 @@
-# Recomposition Tracker for Jetpack Compose
+# Recomposition Tracker for Compose Multiplatform
 
-A simple tool to track UI recompositions in real-time for Jetpack Compose. This project allows you to visualize and measure how often your components are recomposed, helping you optimize your UI and understand performance bottlenecks.
+A simple tool to track UI recompositions in real-time for Compose Multiplatform. This project allows you to visualize and measure how often your components are recomposed, helping you optimize your UI and understand performance bottlenecks.
 
 Inspired by [React Scanner](https://t.co/jyqyMp9SZ4), this tool shows which composables are being recomposed and how often, with a live count and visual feedback.
 
