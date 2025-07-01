@@ -1,0 +1,7 @@
+TEAM_ID=
+
+PRODUCT_NAME=JetpackComposScanner
+PRODUCT_BUNDLE_IDENTIFIER=com.qamar.jetpackcomposscanner.JetpackComposScanner$(TEAM_ID)
+
+CURRENT_PROJECT_VERSION=1
+MARKETING_VERSION=1.0
