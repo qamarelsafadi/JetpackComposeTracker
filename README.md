@@ -15,7 +15,7 @@ Inspired by [React Scanner](https://t.co/jyqyMp9SZ4), this tool shows which comp
 
 https://github.com/user-attachments/assets/da45964c-47ca-41ea-aa03-61b189b1576f
 
-## Installation
+## Installation - for Compose Multiplatform 
 
 Add the dependency to your app's `build.gradle.kts`:
 
@@ -24,6 +24,17 @@ dependencies {
     implementation("io.github.qamarelsafadi:compose-tracker:1.1.0")
 }
 ```
+
+## Installation - for Normal Android 
+
+Add the dependency to your app's `build.gradle.kts`:
+
+```kotlin
+dependencies {
+    implementation("io.github.qamarelsafadi:compose-tracker:1.0.0")
+}
+```
+
 
 ## Usage
 
