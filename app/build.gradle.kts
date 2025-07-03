@@ -68,7 +68,7 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.uiToolingPreview)
 
-            implementation(project(":jetpackperformancescanner"))
+            implementation(libs.compose.tracker)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -125,7 +125,7 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "com.qamar.jetpackcomposscanner"
-            packageVersion = "1.0.0"
+            packageVersion = "1.1.0"
         }
     }
 }

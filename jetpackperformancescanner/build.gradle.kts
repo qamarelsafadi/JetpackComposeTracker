@@ -90,7 +90,7 @@ mavenPublishing {
     
     signAllPublications()
     
-    coordinates("io.github.qamarelsafadi", "compose-tracker", "1.0.0")
+    coordinates("io.github.qamarelsafadi", "compose-tracker", "1.1.0")
     
     pom {
         name.set("Jetpack Compose Tracker")
