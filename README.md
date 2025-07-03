@@ -1,6 +1,6 @@
-# Recomposition Tracker for Jetpack Compose
+# Recomposition Tracker for Compose Multiplatform
 
-A simple tool to track UI recompositions in real-time for Jetpack Compose. This project allows you to visualize and measure how often your components are recomposed, helping you optimize your UI and understand performance bottlenecks.
+A simple tool to track UI recompositions in real-time for Compose Multiplatform. This project allows you to visualize and measure how often your components are recomposed, helping you optimize your UI and understand performance bottlenecks.
 
 Inspired by [React Scanner](https://t.co/jyqyMp9SZ4), this tool shows which composables are being recomposed and how often, with a live count and visual feedback.
 
@@ -13,9 +13,19 @@ Inspired by [React Scanner](https://t.co/jyqyMp9SZ4), this tool shows which comp
 
 ## Demo
 
-https://github.com/user-attachments/assets/6b540c1c-b3c0-455d-84dc-f6f1707416ea
+https://github.com/user-attachments/assets/da45964c-47ca-41ea-aa03-61b189b1576f
 
-## Installation
+## Installation - for Compose Multiplatform 
+
+Add the dependency to your app's `build.gradle.kts`:
+
+```kotlin
+dependencies {
+    implementation("io.github.qamarelsafadi:compose-tracker:1.1.0")
+}
+```
+
+## Installation - for Normal Android 
 
 Add the dependency to your app's `build.gradle.kts`:
 
@@ -24,6 +34,7 @@ dependencies {
     implementation("io.github.qamarelsafadi:compose-tracker:1.0.0")
 }
 ```
+
 
 ## Usage
 
