@@ -10,6 +10,7 @@ Inspired by [React Scanner](https://t.co/jyqyMp9SZ4), this tool shows which comp
 - Live recomposition count: Each component that gets recomposed shows how many times it has been recomposed.
 - Visual feedback: Components that are recomposed are outlined with a red border, and their recomposition count is displayed.
 - Production-safe debugging: Use `trackRecompositionsIf()` to leave tracking in your codebase safely — no need to manually add or remove modifiers.
+- Theming: Globally configurable through the `RecompositionTrackerTheme` object.
 
 ## Demo
 
