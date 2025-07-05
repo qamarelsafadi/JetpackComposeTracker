@@ -81,14 +81,6 @@ Modifier.trackRecompositionsIf(enabled = BuildConfig.DEBUG)
 Modifier.trackRecompositionsIf(enabled = isDebugging)
 ```
 
-## How It Works
-
-This tool uses the `Modifier.trackRecompositions()` to track recompositions. When a recomposition occurs, the component will display a red border, and the recomposition count will update.
-
-The library provides two main functions:
-- `trackRecompositions()`: Always tracks recompositions
-- `trackRecompositionsIf(enabled: Boolean)`: Conditionally tracks recompositions based on the enabled parameter
-
 
 ### Ui Customization
 You can customize its appearance through the global **RecompositionTrackerTheme** object.
@@ -109,6 +101,15 @@ data object RecompositionTrackerTheme {
 You typically want to configure **RecompositionTrackerTheme** once in your app (e.g., at the root of
 your UI or in an Application class), then apply **trackRecompositionsIf()** wherever needed.
 This ensures consistent styling across your entire app.
+
+## How It Works
+
+This tool uses the `Modifier.trackRecompositions()` to track recompositions. When a recomposition occurs, the component will display a red border, and the recomposition count will update.
+
+The library provides two main functions:
+- `trackRecompositions()`: Always tracks recompositions
+- `trackRecompositionsIf(enabled: Boolean)`: Conditionally tracks recompositions based on the enabled parameter
+
 
 ## Contribution
 
