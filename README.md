@@ -89,6 +89,27 @@ The library provides two main functions:
 - `trackRecompositions()`: Always tracks recompositions
 - `trackRecompositionsIf(enabled: Boolean)`: Conditionally tracks recompositions based on the enabled parameter
 
+
+### Ui Customization
+You can customize its appearance through the global **RecompositionTrackerTheme** object.
+
+#### 🔧 Customizing the Tracker Theme
+You can override the default appearance by modifying the global RecompositionTrackerTheme.
+This includes options for **border style**, **text style**, and **contentPadding**.
+```kotlin
+data object RecompositionTrackerTheme {
+    var enabled: Boolean
+    var border: Border
+    var textStyle: RecompositionTextStyle
+    var contentPadding: PaddingValues
+}
+```
+
+##### 💡 Pro Tip
+You typically want to configure **RecompositionTrackerTheme** once in your app (e.g., at the root of
+your UI or in an Application class), then apply **trackRecompositionsIf()** wherever needed.
+This ensures consistent styling across your entire app.
+
 ## Contribution
 
 If you'd like to contribute to this project, feel free to open issues, submit pull requests, or suggest new features. Here's how you can contribute:
