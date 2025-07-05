@@ -34,7 +34,7 @@ fun RecompositionTrackerScreen() {
             label = { Text("Enter item") },
             modifier = Modifier
                 .fillMaxWidth()
-                .trackRecompositionsIf(true)
+                .trackRecompositionsIf()
         )
 
         Spacer(modifier = Modifier.height(28.dp))
