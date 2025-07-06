@@ -4,6 +4,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.OutlinedTextFieldDefaults.contentPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
@@ -12,23 +13,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.qamar.composescanner.Border
-import com.qamar.composescanner.RecompositionTrackerTheme
 
 @Composable
 fun Modifier.trackRecompositions(
-    border: Border = RecompositionTrackerTheme.border,
-    textStyle: RecompositionTextStyle = RecompositionTrackerTheme.textStyle,
-    contentPadding: PaddingValues = RecompositionTrackerTheme.contentPadding
+    style: RecompositionTrackerStyle = RecompositionTrackerProperties.style
 ): Modifier {
     var recompositionCount by remember { mutableIntStateOf(0) }
     val textMeasurer = rememberTextMeasurer()
@@ -43,23 +33,23 @@ fun Modifier.trackRecompositions(
         .then(
             Modifier.drawWithContent {
                 drawContent() // Draw the original content
-                val text = "${textStyle.prefix}$recompositionCount"
+                val text = "${style.textStyle.prefix}$recompositionCount"
 
                 // Draw the recomposition count text overlay on top of content
                 drawText(
                     textMeasurer = textMeasurer,
                     text = text,
-                    style = textStyle.style,
-                    topLeft = textStyle.offset
+                    style = style.textStyle.style,
+                    topLeft = style.textStyle.offset
                 )
             }
         )
         .border(
-            width = border.width,
-            color = border.color,
-            shape = border.shape
+            width = style.border.width,
+            color = style.border.color,
+            shape = style.border.shape
         )
-        .padding(contentPadding)
+        .padding(style.contentPadding)
 }
 
 /**
@@ -79,10 +69,8 @@ fun Modifier.trackRecompositions(
  */
 @Composable
 fun Modifier.trackRecompositionsIf(
-    enabled: Boolean = RecompositionTrackerTheme.enabled,
-    border: Border = RecompositionTrackerTheme.border,
-    textStyle: RecompositionTextStyle = RecompositionTrackerTheme.textStyle,
-    contentPadding: PaddingValues = RecompositionTrackerTheme.contentPadding
+    enabled: Boolean = RecompositionTrackerProperties.enabled,
+    style: RecompositionTrackerStyle = RecompositionTrackerProperties.style,
 ): Modifier {
-    return if (enabled) this.trackRecompositions(border, textStyle, contentPadding) else this
+    return if (enabled) this.trackRecompositions(style) else this
 }

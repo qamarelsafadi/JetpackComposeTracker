@@ -24,32 +24,44 @@ data class RecompositionTextStyle(
 )
 
 /**
- * @param enabled Whether recomposition tracking should be applied to the composable.
  * @param border The border to apply to the composable.
  * @param textStyle The text to display in the border.
  * @param contentPadding The padding to apply to the composable's content.
  */
-data object RecompositionTrackerTheme {
-    var enabled: Boolean = false
-
-    var border: Border = Border(
-        width = 2.dp,
-        color = Color.Red
-    )
-
-    var textStyle: RecompositionTextStyle = RecompositionTextStyle(
-        prefix = "Recompositions: ",
-        style = TextStyle(
-            fontSize = 12.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Red
-        ),
-        offset = Offset(
-            x = 8f,
-            y = 8f
+data class RecompositionTrackerStyle(
+    val border: Border,
+    val textStyle: RecompositionTextStyle,
+    val contentPadding: PaddingValues
+) {
+    companion object {
+        val DEFAULT = RecompositionTrackerStyle(
+            border = Border(
+                width = 2.dp,
+                color = Color.Red
+            ),
+            textStyle = RecompositionTextStyle(
+                prefix = "Recompositions: ",
+                style = TextStyle(
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Red
+                ),
+                offset = Offset(
+                    x = 8f,
+                    y = 8f
+                )
+            ),
+            contentPadding = PaddingValues(16.dp)
         )
-    )
+    }
+}
 
-    var contentPadding: PaddingValues = PaddingValues(16.dp)
+/**
+ * @param enabled Whether recomposition tracking should be applied to the composable.
+ * @param style The style to apply to [trackRecompositions] modifier
+ */
+data object RecompositionTrackerProperties {
+    var enabled: Boolean = false
+    var style = RecompositionTrackerStyle.DEFAULT
 }
 
