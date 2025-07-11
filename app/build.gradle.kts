@@ -1,4 +1,3 @@
-import org.gradle.kotlin.dsl.implementation
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
@@ -68,7 +67,8 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.uiToolingPreview)
 
-            implementation(libs.compose.tracker)
+            implementation(project(":jetpackperformancescanner"))
+//            implementation(libs.compose.tracker)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
