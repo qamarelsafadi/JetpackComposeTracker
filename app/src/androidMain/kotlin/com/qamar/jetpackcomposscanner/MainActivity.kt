@@ -12,15 +12,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            RecompositionTrackerProperties.apply {
-                enabled = true
-                style = this.style.copy(
-                    border = Border(
-                        width = 1.dp,
-                        color = MaterialTheme.colorScheme.primaryContainer
-                    )
-                )
-            }
             RecompositionTrackerScreen()
         }
     }
