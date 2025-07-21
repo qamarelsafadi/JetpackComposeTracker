@@ -10,6 +10,7 @@ Inspired by [React Scanner](https://t.co/jyqyMp9SZ4), this tool shows which comp
 - Live recomposition count: Each component that gets recomposed shows how many times it has been recomposed.
 - Visual feedback: Components that are recomposed are outlined with a red border, and their recomposition count is displayed.
 - Production-safe debugging: Use `trackRecompositionsIf()` to leave tracking in your codebase safely — no need to manually add or remove modifiers.
+- Theming: Globally configurable through the `RecompositionTrackerTheme` object.
 
 ## Demo
 
@@ -21,7 +22,7 @@ Add the dependency to your app's `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("io.github.qamarelsafadi:compose-tracker:1.1.0")
+    implementation("io.github.qamarelsafadi:compose-tracker:3.0.0")
 }
 ```
 
@@ -31,7 +32,7 @@ Add the dependency to your app's `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("io.github.qamarelsafadi:compose-tracker:1.0.0")
+    implementation("io.github.qamarelsafadi:compose-tracker:3.0.0")
 }
 ```
 
@@ -81,6 +82,27 @@ Modifier.trackRecompositionsIf(enabled = BuildConfig.DEBUG)
 Modifier.trackRecompositionsIf(enabled = isDebugging)
 ```
 
+
+### Ui Customization
+You can customize its appearance through the global **RecompositionTrackerTheme** object.
+
+#### 🔧 Customizing the Tracker Theme
+You can override the default appearance by modifying the global RecompositionTrackerTheme.
+This includes options for **border style**, **text style**, and **contentPadding**.
+```kotlin
+data object RecompositionTrackerTheme {
+    var enabled: Boolean
+    var border: Border
+    var textStyle: RecompositionTextStyle
+    var contentPadding: PaddingValues
+}
+```
+
+##### 💡 Pro Tip
+You typically want to configure **RecompositionTrackerTheme** once in your app (e.g., at the root of
+your UI or in an Application class), then apply **trackRecompositionsIf()** wherever needed.
+This ensures consistent styling across your entire app.
+
 ## How It Works
 
 This tool uses the `Modifier.trackRecompositions()` to track recompositions. When a recomposition occurs, the component will display a red border, and the recomposition count will update.
@@ -88,6 +110,7 @@ This tool uses the `Modifier.trackRecompositions()` to track recompositions. Whe
 The library provides two main functions:
 - `trackRecompositions()`: Always tracks recompositions
 - `trackRecompositionsIf(enabled: Boolean)`: Conditionally tracks recompositions based on the enabled parameter
+
 
 ## Contribution
 

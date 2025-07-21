@@ -22,6 +22,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.qamar.composescanner.trackRecompositionsIf
 
+//import com.qamar.composescanner.trackRecompositionsIf
+
 @Composable
 fun RecompositionTrackerScreen() {
     val inputText = remember { mutableStateOf("") }
@@ -34,7 +36,7 @@ fun RecompositionTrackerScreen() {
             label = { Text("Enter item") },
             modifier = Modifier
                 .fillMaxWidth()
-                .trackRecompositionsIf(true)
+                .trackRecompositionsIf()
         )
 
         Spacer(modifier = Modifier.height(28.dp))

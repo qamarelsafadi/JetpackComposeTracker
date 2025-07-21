@@ -1,4 +1,4 @@
-import org.gradle.kotlin.dsl.implementation
+import org.gradle.internal.extensions.stdlib.capitalized
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
@@ -10,7 +10,6 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.compose.compiler)
-    id("com.vanniktech.maven.publish") version "0.29.0"
 }
 
 kotlin {
@@ -27,7 +26,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "ComposeApp"
+            baseName = "ComposeApp${iosTarget.name.capitalized()}" // e.g. ComposeAppIosX64
             isStatic = true
         }
     }
@@ -68,6 +67,7 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.uiToolingPreview)
 
+//            implementation(project(":jetpackperformancescanner"))
             implementation(libs.compose.tracker)
         }
         desktopMain.dependencies {
