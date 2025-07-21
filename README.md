@@ -22,7 +22,7 @@ Add the dependency to your app's `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("io.github.qamarelsafadi:compose-tracker:1.1.0")
+    implementation("io.github.qamarelsafadi:compose-tracker:3.0.0")
 }
 ```
 
@@ -32,7 +32,7 @@ Add the dependency to your app's `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("io.github.qamarelsafadi:compose-tracker:1.0.0")
+    implementation("io.github.qamarelsafadi:compose-tracker:3.0.0")
 }
 ```
 
