@@ -1,6 +1,6 @@
 [versions]
 agp = "8.5.2"
-composeTracker = "1.1.0"
+composeTracker = "3.0.0"
 kotlin = "2.2.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
